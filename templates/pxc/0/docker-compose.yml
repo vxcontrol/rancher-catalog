@@ -43,6 +43,8 @@ pxc:
   volumes_from:
     - 'pxc-data'
   volume_driver: ${storage_driver}
+  external_links:
+    - pxc-lb:loadbalancer
 pxc-lb:
   expose:
   - 3306:3306/tcp

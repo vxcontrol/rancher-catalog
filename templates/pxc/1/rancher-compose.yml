@@ -4,6 +4,12 @@
   description: |
     Percona XtraDB Cluster 5.7.16
   questions:
+    - variable: "scale_num"
+      description: Desired cluster size. 3, 5, or 7 are good choices. You will need this many hosts to reach your desired scale.
+      label: Number of Nodes PXC
+      required: true
+      default: 3
+      type: int
     - variable: "etcd_service"
       label: "Etcd"
       description: Service link to Etcd. This will be mapped to the container as 'etcd'
@@ -52,6 +58,8 @@
       default: ""
       type: "string"      
 pxc:
+  scale: ${scale_num}
+  retain_ip: true
   health_check:
     port: 8000
     interval: 2000

@@ -4,6 +4,12 @@
   description: |
     Percona XtraDB Cluster 5.6.28
   questions:
+    - variable: "scale_num"
+      description: Desired cluster size. 3, 5, or 7 are good choices. You will need this many hosts to reach your desired scale.
+      label: Number of Nodes PXC
+      required: true
+      default: 3
+      type: int
     - variable: "storage_driver"
       label: "Storage Driver"
       description: Storage driver for Percona data (can be empty string)
@@ -37,7 +43,8 @@
       label: "MySQL DB Password"
       description: "Password for the MySQL user of the created database"
 pxc:
-  scale: 3
+  scale: ${scale_num}
+  retain_ip: true
   health_check:
     port: 8000
     interval: 2000

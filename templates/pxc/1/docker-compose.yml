@@ -17,6 +17,7 @@ pxc:
   volume_driver: ${storage_driver}
   external_links:
     - ${etcd_service}:etcd
+    - pxc-lb:loadbalancer
   entrypoint: /opt/rancher/start_etcd
 pxc-data:
   image: registry.vxcontrol.com:8443/percona-xtradb-cluster:5.7.16-alpine1
