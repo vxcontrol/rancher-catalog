@@ -70,6 +70,7 @@ pxc:
     response_timeout: 2000
 pxc-lb:
   scale: 1
+  retain_ip: true
   load_balancer_config: {}
   health_check:
     port: 42

@@ -69,6 +69,7 @@ pxc:
       wsrep_sst_auth=sstuser:${pxc_sst_password}
 pxc-lb:
   scale: 1
+  retain_ip: true
   load_balancer_config: {}
   health_check:
     port: 42

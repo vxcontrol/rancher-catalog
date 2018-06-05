@@ -56,6 +56,7 @@ etcd:
     healthy_threshold: 2
 etcd-lb:
   scale: 1
+  retain_ip: true
   load_balancer_config: {}
   health_check:
     port: 42
