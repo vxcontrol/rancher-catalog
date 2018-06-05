@@ -1,0 +1,5 @@
+name: "Percona XtraDB Cluster"
+description: |
+  Percona XtraDB Cluster
+version: 5.7.17-29.20-rancher1
+category: Databases
