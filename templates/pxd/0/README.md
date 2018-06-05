@@ -1,17 +1,27 @@
-# [1.1.6-GA Documentation](http://docs.portworx.com)
+# Volume plugin for Portworx
 
-This catalog will spin up Portworx on your hosts.
-There are 2 configuration variables required:
- 1. **cluster_id**:  Arbitrary Cluster ID, common to all nodes in PX cluster.  (Can use https://www.uuidgenerator.net for example)
- 2. **kvdb**:  A Key-value database that is accessible to all nodes in the PX cluster.  (Ex: etcd://10.0.0.42:4001)
- 3. **header_dir**: The directory where kernel headers can be found.  Default is "/usr/src".  For CoreOS use "/lib/modules"
- 4. **use_disks**: The list of devices to use as part of the cluster fabric. (Ex: '-a' for all disks, or '-s /dev/sdX' for each individual disk)
+Connect Portworx Hyper-converged Elastic Fabric to Cattle in Rancher!
 
-**NOTE**: px-dev requires at least one non-root disk be attached to the running image (i.e local disk or iscsi).
+This plugin enables both provisioning and management of storage resources. Deploying this service will maintain an instance of the plugin on each of the hosts in the environment.
 
-**NOTE**: If using Docker prior to 1.12, then you **MUST** remove 'MOUNT=shared' from the docker.service file and restart the docker service.
+Portworx is an elastic data fabric that runs hyperconverged with containers. 
 
-For detailed documentation, please visit [docs.portworx.com](http://docs.portworx.com)
+Portworx fingerprints devices in a server, tiers based on drive capabilities, and aggregates capacity across multiple servers.
 
-For the Portworx Enterprise edition which has support for a larger number of nodes, enterprise features such as cloud native encryption, monitoring and web UI, contact support@portworx.com
+Portworx deploys as a container, and so it can run on baremetal Linux nodes, VMs or any cloud server.
+
+Users run Portworx to get cloud-neutral elastic storage capacity, and high-availability at the container-level.
+
+For more information about the plugin, see the [Portworx Docs](https://docs.portworx.com).
+
+### Supported storage platforms
+Portworx Elastic Data Fabric for Containers.
+
+### Supported hosts
+* RHEL / CentOS
+* Ubuntu / Debian
+* CoreOS
+
+### Configured hosts
+Each host must contribute one non-root volume or partition to the Global Pool.
 
