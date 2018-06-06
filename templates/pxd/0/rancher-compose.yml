@@ -3,7 +3,6 @@
   version: "edge"
   description: "Portworx Docker Volume Plugin"
   questions:
-
     - variable: "ETCD_SERVICE"
       label: "Etcd"
       description: Service link to Etcd. This will be mapped to the container as 'etcd'
@@ -45,9 +44,7 @@
       type: "string"
       required: true
       default: "/usr/src"
-
-
-portworx:
+pxd:
   labels:
     io.rancher.container.dns: 'true'
     io.rancher.container.hostname_override: container_name
