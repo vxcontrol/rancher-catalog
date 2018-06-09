@@ -1,0 +1,8 @@
+name: Let's Encrypt
+description: |
+  Trusted SSL certificates at zero cost
+version: 1.0.0
+category: Security
+maintainer: Dmitry NN <19asdek91@gmail.com>
+license: The MIT License
+projectURL: http://www.github.com/vxcontrol/rancher-letsencrypt
