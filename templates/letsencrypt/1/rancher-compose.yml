@@ -40,8 +40,8 @@
     - variable: DOMAINS
       label: Domain Names
       description: |
-        Comma delimited list of the certificate domains starting with the Common Name.
-        E.g: `example.com, dev.example.com`.
+        Comma delimited list of the certificate domains starting with the Common Name (including wildcard certificates).
+        E.g: `example.com, *.example.com`.
       required: true
       type: string
     - variable: PUBLIC_KEY_TYPE

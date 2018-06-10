@@ -3,6 +3,16 @@
 ### About
 The Let's Encrypt Certificate Manager obtains a free (SAN) SSL Certificate from the [Let's Encrypt CA](https://letsencrypt.org/) and adds it to Rancher's certificate store. Once the certificate is created it is scheduled for automatic renewal 20-days before expiration. Rancher load balancer services are automatically updated to use the renewed certificate.
 
+### Changelog v1.0.0
+
+- Major changes for this version are using ACME v2 and possibility of generate wildcard certificates
+- Bump version of lego to 1.0.1
+- Changed links to this repository
+- Docs formatting (by gkapkowski)
+- Read configuration from env or secrets file (by gkapkowski)
+- We don't need an Access Key if the correct IAM role is set, this shouldn't be fatal (by MartinLeedotOrg)
+- Add new dockerfile and make target (by tim.webster)
+
 ### Changelog v0.5.0
 
 - Added support for Aurora DNS, Azure DNS and NS1
@@ -98,4 +108,4 @@ Simply choose `HTTP` from the list of providers.
 Then make sure that HTTP requests to `domain.com/.well-known/acme-challenge` are forwarded to port 80 of the `rancher-letsencrypt` service, e.g. by configuring a Rancher load balancer accordingly. Make sure the reverse proxy passes the original `host` header to the backend.
 
 ### Suggestions & bug reports
-Please submit suggestions or any issues you find to the [rancher-letsencrypt](https://github.com/janeczku/rancher-letsencrypt) GitHub repo.
+Please submit suggestions or any issues you find to the [rancher-letsencrypt](https://github.com/vxcontrol/rancher-letsencrypt) GitHub repo.
