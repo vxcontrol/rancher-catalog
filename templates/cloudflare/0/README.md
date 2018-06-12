@@ -8,7 +8,7 @@ Rancher External DNS service powered by CloudFlare DNS
 
 * Skip Traffic Policy records when traversing zone
 * Fixed an issue where modifying an environment name was not being updated
-* Added CNAME records for linked Service to some Load Balancer Service
+* Added CNAME records for linked Service to some Load Balancer Service (if using root domain name)
 
 ##### v0.6.0
 

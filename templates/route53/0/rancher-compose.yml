@@ -17,10 +17,10 @@
       required: false
     - variable: "TTL"
       label: "TTL"
-      description: "The resource record cache time to live (TTL), in seconds (minimum 30 / maximum 7200)"
+      description: "The resource record cache time to live (TTL), in seconds (minimum 60 / maximum 7200)"
       type: "int"
       default: 60
-      min: 30
+      min: 60
       max: 7200
       required: false
     - variable: "ROOT_DOMAIN"
