@@ -1,3 +1,4 @@
+# notemplating
 .catalog:
   name: "CloudFlare DNS"
   version: "v0.7.9"

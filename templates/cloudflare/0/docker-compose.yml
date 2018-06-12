@@ -1,3 +1,4 @@
+# notemplating
 cloudflare:
   image: registry.vxcontrol.com:8443/external-dns:v0.7.9
   command: -provider=cloudflare
