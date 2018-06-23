@@ -35,6 +35,13 @@
       default: "1194"
       type: "string"
       
+    - variable: "VPNINT_DOMAIN"
+      description: "VPN Internal DNS suffix (SEARCH and DOMAIN) which used in DHCP packets from server"
+      label: "DNS suffix:"
+      required: true
+      default: "rancher.internal"
+      type: "string"
+      
     - variable: "VPNDNS_SERVER"
       description: "VPN DNS server address which use to default in DHCP packets from server"
       label: "DNS Server address:"
