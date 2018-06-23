@@ -10,11 +10,6 @@ services:
       - data
     external_links:
       - ${ETCD_ENDPOINTS}:etcd
-    tty: true
-    image: rancher/load-balancer-service
-    links:
-    - coredns:coredns
-    stdin_open: true
   data:
     image: registry.vxcontrol.com:8443/coredns-file:v0.8.0
     labels:
