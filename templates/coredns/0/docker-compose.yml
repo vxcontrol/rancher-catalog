@@ -10,11 +10,6 @@ services:
       - data
     external_links:
       - ${ETCD_ENDPOINTS}:etcd
-      - coredns-lb:loadbalancer
-  coredns-lb:
-    expose:
-    - ${PUBLISH_PORT}:${PUBLISH_PORT}/tcp
-    - ${PUBLISH_PORT}:${PUBLISH_PORT}/udp
     tty: true
     image: rancher/load-balancer-service
     links:
