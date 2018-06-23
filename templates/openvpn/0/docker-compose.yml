@@ -25,6 +25,7 @@ openvpn-rancherlocal-server:
     VPNDNS_SERVER: ${VPNDNS_SERVER}
     VPNPOOL_NETWORK: ${VPNPOOL_NETWORK}
     VPNPOOL_CIDR: ${VPNPOOL_CIDR}
+    VPNINT_DOMAIN: ${VPNINT_DOMAIN}
     OPENVPN_EXTRACONF: ${OPENVPN_EXTRACONF}
   labels:
     io.rancher.sidekicks: openvpn-rancherlocal-data
