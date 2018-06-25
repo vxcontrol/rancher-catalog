@@ -1,0 +1,96 @@
+.catalog:
+  name: "Prometheus"
+  version: "4.0.0"
+  description: "Prometheus Monitoring Solution"
+  uuid: prometheus-2
+  minimum_rancher_version: v1.5.5
+  questions:
+  - variable: "RANCHER_SERVER"
+    label: "Rancher Server"
+    description: "IP Address of the rancher server, no HTTP or slashes. This is only required for users that have enabled metrics to be exported by Rancher"
+    default: "0.0.0.0"
+    required: false
+    type: "string"
+  - variable: "VOLUME_DRIVER"
+    description: "The VOLUME driver to associate with this server"
+    label: "VOLUME Driver"
+    required: true
+    default: "local"
+    type: enum
+    options:
+      - local
+      - pxd
+      - rancher-nfs
+      - rancher-efs
+      - rancher-ebs
+  - variable: "PROMETHEUS_DOMAIN"
+    label: "Prometheus Domain Name"
+    description: "Use this domain name to connect to Prometheus server"
+    default: "prometheus.rancher.internal"
+    required: true
+    type: "string"
+  - variable: "GRAFANA_DOMAIN"
+    label: "Grafana Domain Name"
+    description: "Use this domain name to connect to Grafana server"
+    default: "grafana.rancher.internal"
+    required: true
+    type: "string"
+
+prometheus:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 9090
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+grafana:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 3000
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+prometheus-rancher-exporter:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 9173
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+viewer-lb:
+  scale: 1
+  start_on_create: true
+  retain_ip: true
+  load_balancer_config: {}
+  lb_config:
+    port_rules:
+    - priority: 1
+      protocol: http
+      service: prometheus
+      hostname: ${PROMETHEUS_DOMAIN}
+      source_port: 80
+      target_port: 9090
+    - priority: 2
+      protocol: http
+      service: grafana
+      hostname: ${GRAFANA_DOMAIN}
+      source_port: 80
+      target_port: 3000
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    interval: 2000
