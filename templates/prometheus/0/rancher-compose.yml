@@ -69,7 +69,7 @@ prometheus-rancher-exporter:
     healthy_threshold: 2
     response_timeout: 5000
 
-viewer-lb:
+prometheus-lb:
   scale: 1
   start_on_create: true
   retain_ip: true
@@ -82,6 +82,20 @@ viewer-lb:
       hostname: ${PROMETHEUS_DOMAIN}
       source_port: 80
       target_port: 9090
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    interval: 2000
+
+grafana-lb:
+  scale: 1
+  start_on_create: true
+  retain_ip: true
+  load_balancer_config: {}
+  lb_config:
+    port_rules:
     - priority: 2
       protocol: http
       service: grafana

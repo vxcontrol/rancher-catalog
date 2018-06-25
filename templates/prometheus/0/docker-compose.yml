@@ -69,13 +69,23 @@ prometheus-rancher-exporter:
       io.rancher.container.agent.role: environment
     image: infinityworks/prometheus-rancher-exporter:v0.22.52
 
-viewer-lb:
+prometheus-lb:
+  image: rancher/lb-service-haproxy:v0.9.1
+  expose:
+    - 80:80/tcp
+  links:
+    - prometheus:prometheus
+  labels:
+    io.rancher.container.agent.role: environmentAdmin,agent
+    io.rancher.container.agent_service.drain_provider: 'true'
+    io.rancher.container.create_agent: 'true'
+
+grafana-lb:
   image: rancher/lb-service-haproxy:v0.9.1
   expose:
     - 80:80/tcp
   links:
     - grafana:grafana
-    - prometheus:prometheus
   labels:
     io.rancher.container.agent.role: environmentAdmin,agent
     io.rancher.container.agent_service.drain_provider: 'true'
