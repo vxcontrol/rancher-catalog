@@ -1,5 +1,5 @@
 etcd:
-    image: registry.vxcontrol.com:8443/etcd:v3.2.9-1
+    image: registry.vxcontrol.com:8443/etcd:v2.3.7-14
     labels:
         io.rancher.scheduler.affinity:host_label_soft: etcd=true
         io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
