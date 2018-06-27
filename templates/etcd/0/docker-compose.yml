@@ -9,6 +9,7 @@ etcd:
         EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
         BACKUP_PERIOD: '${BACKUP_PERIOD}'
         BACKUP_RETENTION: '${BACKUP_RETENTION}'
+        ETCD_ELECTION_TIMEOUT: 5000
     volumes:
     - etcd:/pdata
     - ${BACKUP_LOCATION}:/data-backup

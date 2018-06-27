@@ -1,5 +1,5 @@
 .catalog:
-  version: 3.2.9-1
+  version: 2.3.7-14
   upgrade_from: "2.3.7-build.11"
   minimum_rancher_version: v1.2.0
   questions:
