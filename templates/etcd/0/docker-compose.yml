@@ -11,7 +11,6 @@ etcd:
         BACKUP_RETENTION: '${BACKUP_RETENTION}'
         ETCD_ELECTION_TIMEOUT: 5000
     volumes:
-    - etcd:/pdata
     - ${BACKUP_LOCATION}:/data-backup
     volumes_from:
     - data
@@ -22,7 +21,7 @@ data:
   command: /bin/true
   net: none
   volumes:
-  - /data
+  - /pdata
   volume_driver: ${STORAGE_DRIVER}
   labels:
     io.rancher.container.start_once: 'true'
