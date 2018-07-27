@@ -42,10 +42,10 @@ volumes:
   redminedata:
     driver: ${VOLUME_DRIVER}
     driver_opts:
-    - size: 7
+      size: 7
   redminelog:
     driver: ${VOLUME_DRIVER}
   redminedbdata:
     driver: ${VOLUME_DRIVER}
     driver_opts:
-    - size: 7
+      size: 7
