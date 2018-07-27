@@ -41,6 +41,7 @@ services:
 volumes:
   redminedata:
     driver: ${VOLUME_DRIVER}
+    driver_opts:
     - size: 7
   redminelog:
     driver: ${VOLUME_DRIVER}
