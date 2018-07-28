@@ -5,33 +5,21 @@ catalog:
   description: |
     Redmine
   questions:
-  - variable: "REDMINE_PUBLISH_DOMAIN"
-    description: "FQDN to use for the Redmine server"
-    label: "REDMINE Domain"
-    required: true
-    default: "redmine.local"
-    type: "string"
-  - variable: "TZ"
-    description: "Timezone to use for the server"
-    label: "Timezone"
-    required: true
-    default: "America/Chicago"
-    type: "string"
   - variable: "DB_PASS"
     description: "Database Password to use for the server"
-    label: "DB Password"
+    label: "REDMINE DB Password:"
     required: true
     default: ""
     type: "password"
   - variable: "REDMINE_SECRET_TOKEN"
     description: "REDMINE_SECRET_TOKEN"
-    label: "REDMINE_SECRET_TOKEN"
+    label: "REDMINE Secret Tocken:"
     required: true
     default: ""
     type: "password"
   - variable: "VOLUME_DRIVER"
     description: "The VOLUME driver to associate with this server"
-    label: "VOLUME Driver"
+    label: "REDMINE VOLUME Driver:"
     required: true
     default: "rancher-nfs"
     type: enum
@@ -41,9 +29,15 @@ catalog:
       - rancher-nfs
       - rancher-efs
       - rancher-ebs
+  - variable: "TZ"
+    description: "Timezone to use for the server"
+    label: "REDMINE Timezone:"
+    required: true
+    default: "America/Chicago"
+    type: "string"
   - variable: "REDMINE_PUBLISH_DOMAIN"
     description: "FQDN to use for the Redmine server"
-    label: "REDMINE Publish Domain"
+    label: "REDMINE Publish Domain:"
     required: true
     default: "redmine.local"
     type: "string"
@@ -56,15 +50,8 @@ catalog:
     options:
       - http
       - https
-  - variable: "REDMINE_PUBLISH_NAME"
-    label: "REDMINE Publish Name"
-    description: |
-      Set publish fqdn for Redmine server.
-    required: true
-    type: "string"
-    default: "redmine.local"
   - variable: "REDMINE_PUBLISH_PORT"
-    label: "REDMINE Publish Port"
+    label: "REDMINE Publish Port:"
     description: |
       Set port if you want publish external port for Redmine server.
     required: true
@@ -72,7 +59,7 @@ catalog:
     default: 8080
   - variable: "SSL_CERT"
     description: "Select SSL certificate." 
-    label: "SSL certificate:"
+    label: "REDMINE SSL certificate:"
     required: true
     default: ""
     type: "certificate"
