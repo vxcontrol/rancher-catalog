@@ -1,31 +1,35 @@
 version: '2'
 services:
   redmine:
-    image: sameersbn/redmine:3.3.2-1
+    image: sameersbn/redmine:3.4.6
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
-      traefik.enable: true
-      traefik.alias: ${REDMINE_HOST}
-      traefik.domain: ${REDMINE_DOMAIN}
-      traefik.acme: true
-      traefik.port: 80
+      io.rancher.service.external_dns_fqdn: ${REDMINE_PUBLISH_DOMAIN}
     environment:
     - PORT=80
     - TZ=${TZ}
     - DB_PASS=${DB_PASS}
     - DB_ADAPTER=mysql2
     - DB_HOST=db
+    - DB_PORT=3306
     - DB_USER=redmine
     - DB_NAME=redmine_production
     - REDMINE_SECRET_TOKEN=${REDMINE_SECRET_TOKEN}
-    - SMTP_ENABLED=false
     - IMAP_ENABLED=false
+    - SMTP_ENABLED=${SMTP_ENABLED}
+    - SMTP_USER=${SMTP_USER}
+    - SMTP_PASS=${SMTP_PASS}
+    - SMTP_DOMAIN=${SMTP_DOMAIN}
+    - SMTP_HOST=${SMTP_HOST}
+    - SMTP_PORT=${SMTP_PORT}
     volumes:
       - redminedata:/home/redmine/data
       - redminelog:/var/log/redmine
+      - redmineinstall:/home/redmine/redmine
     external_links:
       - db:db
+      - redmine-lb:loadbalancer
   db:
     restart: always
     image: mariadb:10.2
@@ -38,11 +42,21 @@ services:
     - MYSQL_PASSWORD=${DB_PASS}
     - MYSQL_ROOT_PASSWORD=${DB_PASS}
     - MYSQL_DATABASE=redmine_production
+  redmine-lb:
+    expose:
+    - ${REDMINE_PUBLISH_PORT}:${REDMINE_PUBLISH_PORT}/tcp
+    image: rancher/lb-service-haproxy:v0.9.1
+    links:
+    - redmine:redmine
 volumes:
   redminedata:
     driver: ${VOLUME_DRIVER}
     driver_opts:
       size: 7
+  redmineinstall:
+    driver: ${VOLUME_DRIVER}
+    driver_opts:
+      size: 2
   redminelog:
     driver: ${VOLUME_DRIVER}
   redminedbdata:

@@ -5,17 +5,11 @@ catalog:
   description: |
     Redmine
   questions:
-  - variable: "REDMINE_HOST"
-    description: "Hostname to use for the Redmine"
-    label: "Thalhalla Store Hostname"
-    required: true
-    default: "redmine"
-    type: "string"
-  - variable: "REDMINE_DOMAIN"
-    description: "Domain to use for the Redmine server"
+  - variable: "REDMINE_PUBLISH_DOMAIN"
+    description: "FQDN to use for the Redmine server"
     label: "REDMINE Domain"
     required: true
-    default: ""
+    default: "redmine.local"
     type: "string"
   - variable: "TZ"
     description: "Timezone to use for the server"
@@ -47,6 +41,80 @@ catalog:
       - rancher-nfs
       - rancher-efs
       - rancher-ebs
+  - variable: "REDMINE_PUBLISH_DOMAIN"
+    description: "FQDN to use for the Redmine server"
+    label: "REDMINE Publish Domain"
+    required: true
+    default: "redmine.local"
+    type: "string"
+  - variable: "REDMINE_PUBLISH_SCHEMA"
+    description: "Publish schema" 
+    label: "REDMINE Publish Schema:"
+    required: true
+    default: "https"
+    type: "enum"
+    options:
+      - http
+      - https
+  - variable: "REDMINE_PUBLISH_NAME"
+    label: "REDMINE Publish Name"
+    description: |
+      Set publish fqdn for Redmine server.
+    required: true
+    type: "string"
+    default: "redmine.local"
+  - variable: "REDMINE_PUBLISH_PORT"
+    label: "REDMINE Publish Port"
+    description: |
+      Set port if you want publish external port for Redmine server.
+    required: true
+    type: "int"
+    default: 8080
+  - variable: "SSL_CERT"
+    description: "Select SSL certificate." 
+    label: "SSL certificate:"
+    required: true
+    default: ""
+    type: "certificate"
+  - variable: "SMTP_ENABLED"
+    description: "SMTP Enabled" 
+    label: "REDMINE SMTP Enabled:"
+    required: true
+    default: "false"
+    type: "enum"
+    options:
+      - "true"
+      - "false"
+  - variable: "SMTP_DOMAIN"
+    description: "SMTP Domain" 
+    label: "REDMINE SMTP Domain:"
+    required: true
+    default: "www.gmail.com"
+    type: "string"
+  - variable: "SMTP_HOST"
+    description: "SMTP Host" 
+    label: "REDMINE SMTP Host:"
+    required: true
+    default: "smtp.gmail.com"
+    type: "string"
+  - variable: "SMTP_PORT"
+    description: "SMTP Port" 
+    label: "REDMINE SMTP Port:"
+    required: true
+    default: 587
+    type: "int"
+  - variable: "SMTP_USER"
+    description: "SMTP User" 
+    label: "REDMINE SMTP User:"
+    required: false
+    default: ""
+    type: "string"
+  - variable: "SMTP_PASS"
+    description: "SMTP Password" 
+    label: "REDMINE SMTP Password:"
+    required: false
+    default: ""
+    type: "string"
 
 services:
   redmine:
@@ -60,3 +128,21 @@ services:
       interval: 5000
       strategy: recreate
       request_line: GET / # HTTP/1.0
+  redmine-lb:
+    scale: 1
+    retain_ip: true
+    lb_config:
+      certs: []
+      default_cert: ${SSL_CERT}
+      port_rules:
+      - hostname: ${REDMINE_PUBLISH_DOMAIN}
+        protocol: ${REDMINE_PUBLISH_SCHEMA}
+        service: redmine
+        source_port: ${REDMINE_PUBLISH_PORT}
+        target_port: 80
+    health_check:
+      port: 42
+      interval: 2000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000
