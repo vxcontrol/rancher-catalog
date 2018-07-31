@@ -32,7 +32,7 @@ catalog:
         AWX Web Publish Schema
       label: Load Balancer Publish Schema
       required: true
-      default: https
+      default: http
       type: enum
       options:
         - http
@@ -112,18 +112,18 @@ catalog:
       default: guest
       required: true
     - variable: RABBITMQ_PORT
-      label: Enter the port of the RabbitMQ user
+      label: Enter the port of the RabbitMQ server
       description: |
         The RabbitMQ port is used to connect AWX to RabbitMQ so messages get routed properly.  This field is OPTIONAL if you are using the provided RabbitMQ server, or REQUIRED if you are providing your own server.
       type: int
       default: 5672
       required: true
     - variable: RABBITMQ_VHOST
-      label: Enter the VHOST name of the RabbitMQ user
+      label: Enter the VHOST name of the RabbitMQ server
       description: |
         The RabbitMQ VHOST name is used to connect AWX to RabbitMQ so messages get routed properly.  This field is OPTIONAL if you are using the provided RabbitMQ server, or REQUIRED if you are providing your own server.
       type: string
-      default: awx
+      default: rabbit
       required: true
     - variable: RABBITMQ_SERVER
       label: RabbitMQ Server to use
