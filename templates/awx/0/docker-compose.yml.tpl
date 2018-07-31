@@ -45,7 +45,7 @@ services:
 {{- end }}
 {{- end }}
   awx-web:
-    image: ansible/awx_web:1.0.6.15
+    image: ansible/awx_web:1.0.6.41
     hostname: awxweb
     environment:
       SECRET_KEY: ${SECRET_KEY}
@@ -113,6 +113,8 @@ services:
     environment:
       RABBITMQ_ERLANG_COOKIE: awx-erlang-cookie
       RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     stdin_open: true
     tty: true
     labels:
@@ -121,7 +123,7 @@ services:
 {{- end }}
 {{- end }}
   awx-task:
-    image: ansible/awx_task:1.0.6.15
+    image: ansible/awx_task:1.0.6.41
     hostname: awx
     environment:
       SECRET_KEY: ${SECRET_KEY}
@@ -152,7 +154,7 @@ services:
     - ${POSTGRES_SERVER}:postgres
 {{- end }}
 {{- if .Values.RABBITMQ_SERVER }}
-    - ${RABBITMQ_SERVER}:rabbitmq
+    - ${RABBITMQ_SERVER}:${RABBITMQ_VHOST}
 {{- end }}
 {{- if .Values.MEMCACHED_SERVER }}
     - ${MEMCACHED_SERVER}:memcached

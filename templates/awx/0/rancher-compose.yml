@@ -173,7 +173,6 @@ services:
       port_rules:
       - hostname: ${LB_PUBLISH_DOMAIN}
         protocol: ${LB_PUBLISH_SCHEMA}
-        path: ''
         priority: 1
         service: awx-web
         source_port: ${LB_LISTEN_PORT}
