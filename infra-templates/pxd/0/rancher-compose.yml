@@ -3,9 +3,14 @@
   version: "edge"
   description: "Portworx Docker Volume Plugin"
   questions:
-    - variable: "ETCD_SERVICE"
+    - variable: "ETCD_SERVICE_LB"
       label: "Etcd"
-      description: Service link to Etcd. This will be mapped to the container as 'etcd'
+      description: Service link to Etcd Loadbalancer. This will be mapped to the container as 'etcd'
+      type: "service"
+      required: true
+    - variable: "ETCD_SERVICE_SERVERS"
+      label: "Etcd"
+      description: Service link to Etcd Servers. This will be mapped to the container as 'etcd_s'
       type: "service"
       required: true
     - variable: SCALE

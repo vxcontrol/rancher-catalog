@@ -19,7 +19,8 @@ pxd:
     USE_DISKS: ${USE_DISKS}
     ENABLE_ATTR_CACHE: true
   external_links:
-    - ${ETCD_SERVICE}:etcd
+    - ${ETCD_SERVICE_LB}:etcd
+    - ${ETCD_SERVICE_SERVERS}:etcd_s
   volumes:
      - /dev:/dev
      - ${HEADER_DIR}:${HEADER_DIR}
