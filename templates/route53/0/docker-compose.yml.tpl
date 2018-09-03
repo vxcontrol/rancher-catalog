@@ -15,5 +15,8 @@ route53:
   labels:
     io.rancher.container.create_agent: "true"
     io.rancher.container.agent.role: "external-dns"
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
   volumes:
     - /var/lib/rancher:/var/lib/rancher

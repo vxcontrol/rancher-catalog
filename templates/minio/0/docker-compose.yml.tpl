@@ -27,12 +27,18 @@ services:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
       io.rancher.sidekicks: rancher-cattle-metadata
+      {{- if .Values.SC_LABEL_VALUE }}
+      io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+      {{- end }}
   rancher-cattle-metadata:
     network_mode: none
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
       io.rancher.container.start_once: "true"
+      {{- if .Values.SC_LABEL_VALUE }}
+      io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+      {{- end }}
     image: webcenter/rancher-cattle-metadata:1.0.1
     volumes:
       - minio-scheduler-setting:/opt/scheduler
@@ -47,6 +53,9 @@ services:
       io.rancher.container.agent.role: environmentAdmin,agent
       io.rancher.container.agent_service.drain_provider: 'true'
       io.rancher.container.create_agent: 'true'
+      {{- if .Values.SC_LABEL_VALUE }}
+      io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+      {{- end }}
 
 volumes:
   minio-scheduler-setting:

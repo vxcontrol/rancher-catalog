@@ -107,6 +107,11 @@
         E.g. for the `rancher-ebs` driver you should specify the required 'size' option like this: "size: 1".
       required: false
       type: string
+    - variable: SC_LABEL_VALUE
+      label: Scheduler Host Label
+      description: |
+        Enter a name=value pair of any required host label you may want in order to bind your services to.
+      type: string
     - variable: PROVIDER
       label: Domain Validation Method
       description: Select a DNS provider to use for domain validation. Use 'HTTP' if your domain is hosted elsewhere.

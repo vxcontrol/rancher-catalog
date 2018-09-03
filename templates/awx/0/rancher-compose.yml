@@ -41,7 +41,6 @@ catalog:
       label: Scheduler Host Label
       description: |
         Enter a name=value pair of any required host label you may want in order to bind your services to.
-      default: ""
       type: string
     - variable: DATABASE_USERID
       label: Database UserID

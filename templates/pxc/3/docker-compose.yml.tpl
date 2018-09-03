@@ -13,6 +13,9 @@ pxc:
     io.rancher.container.hostname_override: container_name
     io.rancher.scheduler.affinity:host_label_soft: pxc=true
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
   volumes_from:
     - 'pxc-data'
   volume_driver: ${storage_driver}
@@ -34,11 +37,17 @@ pxc-data:
   command: /bin/true
   labels:
     io.rancher.container.start_once: true
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
 pxc-clustercheck:
   image: registry.vxcontrol.com:8443/percona-xtradb-cluster-clustercheck:1.0.0
   net: "container:pxc"
   labels:
     io.rancher.container.hostname_override: container_name
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
   volumes_from:
     - 'pxc-data'
   volume_driver: ${storage_driver}
@@ -50,3 +59,7 @@ pxc-lb:
   links:
   - pxc:pxc
   stdin_open: true
+  labels:
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}

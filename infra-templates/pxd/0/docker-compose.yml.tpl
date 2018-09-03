@@ -3,6 +3,9 @@ pxd:
     io.rancher.container.dns: 'true'
     io.rancher.container.hostname_override: container_name
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
     io.rancher.container.pull_image: always
   image: registry.vxcontrol.com:8443/pxd:edge
   container_name: px

@@ -3,6 +3,9 @@ etcd:
     labels:
         io.rancher.scheduler.affinity:host_label_soft: etcd=true
         io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+        {{- if .Values.SC_LABEL_VALUE }}
+        io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+        {{- end }}
         io.rancher.sidekicks: data
     environment:
         RANCHER_DEBUG: '${RANCHER_DEBUG}'
@@ -25,6 +28,9 @@ data:
   volume_driver: ${STORAGE_DRIVER}
   labels:
     io.rancher.container.start_once: 'true'
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
 etcd-lb:
   expose:
   - 2379:2379/tcp
@@ -33,3 +39,7 @@ etcd-lb:
   links:
   - etcd:etcd
   stdin_open: true
+  labels:
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}

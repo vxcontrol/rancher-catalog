@@ -1,6 +1,9 @@
 openvpn-rancherlocal-data:
   labels:
     io.rancher.container.start_once: 'true'
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
   entrypoint:
   - /bin/true
   image: busybox
@@ -29,6 +32,9 @@ openvpn-rancherlocal-server:
     OPENVPN_EXTRACONF: ${OPENVPN_EXTRACONF}
   labels:
     io.rancher.sidekicks: openvpn-rancherlocal-data
+    {{- if .Values.SC_LABEL_VALUE }}
+    io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
+    {{- end }}
     io.rancher.container.pull_image: always
   image: registry.vxcontrol.com:8443/rancher-openvpn:1.1
   domainname: ${REMOTE_HOST}
