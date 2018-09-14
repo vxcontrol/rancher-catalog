@@ -33,6 +33,9 @@ services:
       OPENVPN_EXTRACONF: ${OPENVPN_EXTRACONF}
     labels:
       io.rancher.sidekicks: openvpn-rancherlocal-data
+      {{- if .Values.VPNINT_DOMAIN }}
+      io.rancher.service.external_dns_fqdn: ${VPNINT_DOMAIN}
+      {{- end }}
       {{- if .Values.SC_LABEL_VALUE }}
       io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
       {{- end }}
