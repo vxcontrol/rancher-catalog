@@ -24,7 +24,6 @@ services:
   data:
     image: busybox
     command: /bin/true
-    net: none
     volumes:
     - pdata-{{.Stack.Name}}:/pdata
     volume_driver: ${STORAGE_DRIVER}
