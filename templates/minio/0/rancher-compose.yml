@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: Minio
-  version: 0.5.0
+  version: 0.6.0
   minimum_rancher_version: v1.2.0
   questions:
     - variable: "MINIO_SCALE"

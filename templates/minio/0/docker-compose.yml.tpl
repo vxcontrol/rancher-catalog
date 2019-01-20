@@ -2,7 +2,7 @@ version: '2'
 services:
   minio-server:
     tty: true
-    image: registry.vxcontrol.com:8443/minio:v0.5.0
+    image: registry.vxcontrol.com:8443/minio:v0.6.0
     volumes:
       - minio-scheduler-setting:/opt/scheduler
     {{- if eq (printf "%.1s" .Values.VOLUME_DRIVER) "/" }}
@@ -20,6 +20,7 @@ services:
       - CONFD_BACKEND=${CONFD_BACKEND}
       - CONFD_NODES=${CONFD_NODES}
       - CONFD_PREFIX_KEY=${CONFD_PREFIX}
+      - MINIO_UPDATE=off
       {{- range $idx, $e := atoi .Values.MINIO_DISKS | until }}
       - MINIO_DISKS_{{$idx}}=disk{{$idx}}
       {{- end}}
@@ -42,9 +43,9 @@ services:
     image: webcenter/rancher-cattle-metadata:1.0.1
     volumes:
       - minio-scheduler-setting:/opt/scheduler
-      - minio-setting-data:/opt/minio/.minio
+      - minio-setting-data:/data/.minio.sys
   minio-lb:
-    image: rancher/lb-service-haproxy:v0.9.1
+    image: rancher/lb-service-haproxy:v0.9.3
     expose:
       - 9000:9000/tcp
     links:
