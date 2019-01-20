@@ -15,8 +15,8 @@ services:
       {{- end}}
     {{- end}}
     environment:
-      - MINIO_CONFIG_accesskey=${MINIO_ACCESS_KEY}
-      - MINIO_CONFIG_secretkey=${MINIO_SECRET_KEY}
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
       - CONFD_BACKEND=${CONFD_BACKEND}
       - CONFD_NODES=${CONFD_NODES}
       - CONFD_PREFIX_KEY=${CONFD_PREFIX}
