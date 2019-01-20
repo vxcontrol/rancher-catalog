@@ -43,7 +43,7 @@ services:
     image: webcenter/rancher-cattle-metadata:1.0.1
     volumes:
       - minio-scheduler-setting:/opt/scheduler
-      - minio-setting-data:/data/.minio.sys
+      - minio-setting-data:/data/disk0/.minio.sys
   minio-lb:
     image: rancher/lb-service-haproxy:v0.9.3
     expose:
