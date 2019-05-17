@@ -40,7 +40,7 @@ services:
       io.rancher.scheduler.affinity:host_label: ${SC_LABEL_VALUE}
       {{- end }}
       io.rancher.container.pull_image: always
-    image: registry.vxcontrol.com:8443/rancher-openvpn:1.1
+    image: registry.vxcontrol.com:8443/rancher-openvpn:1.2
     domainname: ${REMOTE_HOST}
     privileged: true
     volumes_from:
